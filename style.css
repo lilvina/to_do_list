@@ -1,0 +1,23 @@
+.item.purchased {
+  text-decoration: line-through;
+}
+
+body {
+	color: blue;
+	font-size: 16px;
+	background: orange;
+	font-family: Arial;
+}
+
+h1 {
+	color: blue;
+	font-family: Arial;
+}
+.btn-success {
+	color: purple;
+}
+
+.form-control {
+	width: 90%;
+	font-size: 16px;
+}
