@@ -1,41 +1,53 @@
-$(document).ready(function() {
+$(function() {
 
-  var $newItemForm = $("#new_to_do_list");
-  console.log($newItemForm);
-  var toDoList = []
+  function Task(name, desc){
+    this.name = name;
+    this.desc = desc;
+  }
+
+  Task.all = [
+    new Task("Cleaning", "My House"),
+    new Task("Book", "Read"),
+    new Task("Coding", "Study programming")
+
+  ];
+
+  Task.prototype.render = function(){
+    $toDoList.append('<li class="task">' + this.name + ' - ' + this.desc + '</li>');
+    console.log('render')
+  }
+
+  Task.prototype.save = function(){
+    Task.all.push(this);
+  }
+
+  var $newList = $("#new-list");
+
+  var $toDoList = $('#todo-list');
+
+  _.each(Task.all, function (task, index){
+    task.render()
+  });
+
+  $newList.on('submit', function(event) {
+    event.preventDefault();
+
+    var taskName = $('#task-name').val();
+    var taskDesc = $('#task-desc').val();
+    var taskData = {name: taskName, desc: taskDesc};
+
+    task.push(taskData);
+
+    $newList.append('<li class="task">' + taskData.name + ' - ' + taskData.desc + '</li>');
 
 
-  $newItemForm.on("submit", function(event) {
-      event.preventDefault();
-      console.log('form submitted!');
-      console.log($("#task_name").val());  // my to-do list information
-     
-      toDoList.push($('#to_do_list').val());
+    $newList[0].reset();
+    $('#task-name').focus();
+  });
 
-      // add new to do list to view
-      var $newTI = $('<li>' + $('#task_name').val() + '</li>');
-      $('#to_do_list').append($newTI);
+  $toDoList.on('click', 'task', function() {
+    $(this).addClass('done');
+  });
 
-      // add new to do list to model
-      toDoList.push({
-        task_name: $('task_name').val(),
-        quantity: 1
-      });
-    });
+});
 
-      
-
-
-      var task1 = {
-    task_name: "cleaning",
-    description: "nice and neat"
-    };
-
-toDoList.push(task1);
-
-      // add a click event
-      $(".task").click(function() {
-        $(this).remove();
-        console.log(this);
-      });
-    });
